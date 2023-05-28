@@ -1,0 +1,15 @@
+class Solution:
+    def minCost(self, n: int, cuts: List[int]) -> int:
+        def f(cuts,i,j):
+            if i>j:
+                return 0
+            cost=float('inf')
+            for k in range(i,j+1):
+                curr=(cuts[j+1]-cuts[i-1])+f(cuts,i,k-1)+f(cuts,k+1,j)
+                cost=min(cost,curr)
+            return cost
+        cuts.append(0)
+        cuts.append(n)
+        cuts.sort()
+        return f(cuts,1,len(cuts)-2)
+        

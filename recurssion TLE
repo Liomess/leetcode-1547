@@ -1,0 +1,18 @@
+class Solution:
+    def minCost(self, n: int, cuts: List[int]) -> int:
+        def solve(self,start,end,cuts,i,n):
+            if i>=n:
+                return 0
+            cost=float('inf')
+            for k in range(i,n):
+                left=solve(self,start,cuts[k],cuts,i,k)
+                right=solve(self,cuts[k],end,cuts,k+1,n)
+                curr=(end-start)+left+right
+                cost=min(cost,curr)
+            return cost
+            
+        ss=0
+        se=n
+        cuts.sort()
+        noc=len(cuts)
+        return solve(self,ss,se,cuts,0,noc)
